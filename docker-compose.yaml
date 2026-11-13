@@ -1,0 +1,40 @@
+version: "3.9"
+networks:
+  app_network:
+    driver: bridge
+services:
+  domain:
+    image: nginx:1.23.3
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./ssls:/ssls
+      - ./nginx/default-domain.conf:/etc/nginx/conf.d/default-domain.conf
+    networks:
+      - app_network
+volumes:
+  mongo_data:
+# docker compose -f docker-compose.env.production.yaml down && docker image prune -a -f  && docker builder prune -a -f
+# docker compose -f docker-compose.env.production.yaml up -d
+# docker compose -p env_production_my_gbooking -f docker-compose.env.production.yaml up -d
+# docker exec -it mongo_env_production_gbooking /bin/bash
+# docker run -d -p 9000:9000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+# Portainer admin - lambada246357
+# mongodump   -h 0.0.0.0    --port=27017    -u admin    -p gbookingnkd1996     --authenticationDatabase=gbooking   --archive=/database-backup/gbooking-env-production-2026-11-12-16h00.tar.gz
+# mongodump --uri="mongodb://root:gbookingnkd1996@localhost:27017/gbooking?authSource=admin"  --archive=/database-backup/gbooking-env-production-2026-11-12-16h30.tar.gz --gzip
+# mongorestore    -h 0.0.0.0    --port=27017    -u root   -p gbookingnkd1996    -d gbooking   --authenticationDatabase=admin       --archive=./database-backup/gbooking-env-production-2026-11-12-16h30.tar.gz
+# mongorestore --uri="mongodb://root:gbookingnkd1996@mongo:27017/gbooking?authSource=admin" --archive=/database-backup/gbooking-env-production-2026-11-12-16h30.tar.gz --gzip
+#db.createUser(
+#   {
+#     user: "root",
+#     pwd: "Godofwar246357",
+#     roles: [
+#   { role : "root", db: "admin"  }
+# ]
+#   }
+#);
+# docker compose -p env_production_my_gbooking down  && docker image prune -a -f && docker builder prune -a -f && docker volume rm env_production_my_gbooking_mongo_data
+# mongosh 'mongodb://root:gbookingnkd1996@mongo:27017/?authSource=admin' --eval 'show dbs'
+
